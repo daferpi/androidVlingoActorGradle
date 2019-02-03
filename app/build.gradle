@@ -9,6 +9,12 @@ apply plugin: 'io.vlingo.codegen'
 android {
     compileSdkVersion 28
 
+    sourceSets {
+        main {
+            java.srcDirs = ['src/main/java', 'build/generated-sources']
+        }
+    }
+
     compileOptions {
         encoding = 'UTF-8'
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -29,6 +35,8 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+
 }
 
 
@@ -43,4 +51,13 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+}
+
+afterEvaluate {
+    tasks.getByName("generateDebugActorProxies") {
+        actorProtocols.set([
+                "com.projects.abelfernandez.androidvlingoactorgradle.Start",
+                "com.projects.abelfernandez.androidvlingoactorgradle.End"
+        ])
+    }
 }

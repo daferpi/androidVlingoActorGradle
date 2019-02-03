@@ -2,11 +2,36 @@ package com.projects.abelfernandez.androidvlingoactorgradle
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import io.vlingo.actors.Configuration
+import io.vlingo.actors.Definition
+import io.vlingo.actors.World
+import io.vlingo.actors.testkit.TestUntil
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        try {
+            val world: World = World.start("androidvlingoactorgradle")
+
+            val until: TestUntil = TestUntil.happenings(1)
+            val start: Start = world.actorFor(Start::class.java, Definition(StartActor::class.java, Definition.parameters(until)))
+            val end: End = world.actorFor(End::class.java, Definition(EndActor::class.java, Definition.NoParameters))
+
+            start.starting(end)
+
+            until.completes()
+
+            world.isTerminated
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
+
+
+
     }
 }
