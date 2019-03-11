@@ -11,4 +11,8 @@ class EndActor: Actor(), End {
         start.starting(ender)
     }
 
+    override fun stop() {
+        this.stop()
+    }
+
 }

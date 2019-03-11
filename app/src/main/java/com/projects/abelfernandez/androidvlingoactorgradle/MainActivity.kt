@@ -5,8 +5,10 @@ import android.os.Bundle
 import io.vlingo.actors.Configuration
 import io.vlingo.actors.Definition
 import io.vlingo.actors.World
+import io.vlingo.actors.plugin.supervision.CommonSupervisorsPlugin
+import io.vlingo.actors.plugin.supervision.DefaultSupervisorOverride
+import io.vlingo.actors.plugin.supervision.DefaultSupervisorOverridePlugin
 import io.vlingo.actors.testkit.TestUntil
-import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -15,6 +17,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         try {
+
             val world: World = World.start("androidvlingoactorgradle")
 
             val until: TestUntil = TestUntil.happenings(1)
@@ -25,7 +28,7 @@ class MainActivity : AppCompatActivity() {
 
             until.completes()
 
-            world.isTerminated
+//            world.isTerminated
         } catch (e: Exception) {
             e.printStackTrace()
         }

@@ -11,7 +11,7 @@ class StartActor(var until: TestUntil = TestUntil.happenings(1)): Actor(), Start
     override fun starting(end: End) {
         logger().log("starting " + count);
         if (++count >= 10) {
-            starter.stop()
+            this.stop()
             end.stop()
         } else {
             end.finishing(starter)
