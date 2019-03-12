@@ -2,6 +2,7 @@ package com.projects.abelfernandez.androidvlingoactorgradle
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import io.vlingo.actors.Configuration
 import io.vlingo.actors.Definition
 import io.vlingo.actors.World
@@ -26,10 +27,10 @@ class MainActivity : AppCompatActivity() {
 
             start.starting(end)
 
-            until.completes()
+//            until.completes()
 
-//            world.isTerminated
         } catch (e: Exception) {
+            Log.e("actors", e.localizedMessage)
             e.printStackTrace()
         }
 
